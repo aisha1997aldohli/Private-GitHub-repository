@@ -1,0 +1,99 @@
+import java.util.Scanner;
+
+public class CodeLinee {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("Welcome to the Menu-Based Program!");
+            System.out.println("Please select an option");
+            System.out.println("1. Print Pattern");
+            System.out.println("2. Rotate Array");
+            System.out.println("3. Help");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("You selected Option 1.");
+                    // Add code for Option 1 here
+                    System.out.print("Enter the number of rows for the pattern: ");
+                    int rows = scanner.nextInt();
+                    printAsteriskPattern(rows);
+                    break;
+                case 2:
+                    System.out.println("You selected Option 2.");
+                    // Add code for Option 2 here
+                    int[] arr = getInputArray(scanner);
+                    System.out.print("Enter the number of steps (k): ");
+                    int k = scanner.nextInt();
+                    rotateArray(arr, k);
+                    System.out.println("Array after rotation:");
+                    printArray(arr);
+                    break;
+                case 3:
+                    System.out.println("You selected Option 3.");
+                    
+                    break;
+                case 4:
+                    System.out.println("Exiting the program. Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 4);
+
+        scanner.close(); 
+    }
+
+    
+
+    public static void printAsteriskPattern(int rows) {
+        for (int i = rows; i >= 1; i--) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    public static int[] getInputArray(Scanner scanner) {
+        System.out.print("Enter the number of elements (n): ");
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        System.out.print("Enter the array elements separated by spaces: ");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        return arr;
+    }
+
+    public static void rotateArray(int[] arr, int k) {
+        int n = arr.length;
+        k = k % n; 
+        reverse(arr, 0, n - 1);
+        reverse(arr, 0, k - 1);
+        reverse(arr, k, n - 1);
+    }
+
+    public static void reverse(int[] arr, int start, int end) {
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public static void printArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+}
